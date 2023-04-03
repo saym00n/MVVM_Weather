@@ -3,17 +3,10 @@ using System.Windows.Input;
 
 namespace MVVM_Weather.Commands;
 
-internal class BaseCommand : ICommand
+public abstract class BaseCommand : ICommand
 {
-    public bool CanExecute(object? parameter)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Execute(object? parameter)
-    {
-        throw new NotImplementedException();
-    }
+    public abstract bool CanExecute(object? parameter);
+    public abstract void Execute(object? parameter);
 
     public event EventHandler? CanExecuteChanged
     {

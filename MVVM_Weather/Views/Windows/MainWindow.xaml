@@ -11,20 +11,27 @@
         <viewmodels:MainWindowViewModel />
     </Window.DataContext>
     <DockPanel>
+        <Label DockPanel.Dock="Top" Content="OpenWeather ApiKey: " />
+        <TextBox DockPanel.Dock="Top" Text="{Binding ApiKey}"/>
         <Label DockPanel.Dock="Top" Content="Введите название города: " />
         <Grid DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="160*" />
                 <ColumnDefinition Width="70*" />
             </Grid.ColumnDefinitions>
-            <Button Content="Поиск" Grid.Column="1" Margin="20, 0 , 5 , 0" />
+            <Button Content="Поиск" Grid.Column="1" Margin="20, 0 , 5 , 0"  Command="{Binding GetWeatherCommand}"/>
             <StackPanel>
-                <TextBox MaxLines="1" SpellCheck.IsEnabled="True" xml:lang="ru" Height="21" />
+                <TextBox Text="{Binding City}" MaxLines="1" SpellCheck.IsEnabled="True" xml:lang="ru" Height="21" />
             </StackPanel>
         </Grid>
 
         <TabControl>
-            <TabItem Header="Погода" Grid.Column="1"></TabItem>
+            <TabItem Header="Погода" Grid.Column="1">
+                <StackPanel>
+                    <Image Source="{Binding Weather}"></Image>
+                    <Label Content="{Binding Test}"></Label>
+                </StackPanel>
+            </TabItem>
             <TabItem Header="Карта">
                 <WebBrowser/></TabItem>
         </TabControl>
