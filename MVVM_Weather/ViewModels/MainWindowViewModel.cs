@@ -2,7 +2,7 @@
 
 public class MainWindowViewModel : BaseViewModel
 {
-    private string _title;
+    private string _title = "TitleTEst";
 
     public string Title
     {
