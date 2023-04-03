@@ -1,12 +1,11 @@
-﻿namespace MVVM_Weather.VIewModels;
+﻿namespace MVVM_Weather.ViewModels;
 
 public class MainWindowViewModel : BaseViewModel
 {
-    private string _title = "TitleTEst";
+    #region title
 
-    public string Title
-    {
-        get => _title; 
-        set => SetField(ref _title, value); 
-    }
+    private readonly string _title = "Погода";
+    public string Title => _title;
+
+    #endregion
 }

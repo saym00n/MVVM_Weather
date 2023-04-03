@@ -1,16 +1,32 @@
 ﻿<Window x:Class="MVVM_Weather.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:l="clr-namespace:MVVM_Weather" 
-        xmlns:viewmodels="clr-namespace:MVVM_Weather.VIewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
+        xmlns:viewmodels="clr-namespace:MVVM_Weather.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="450" Width="800">
+        Title="{Binding Title}" Height="450" Width="560" ResizeMode="CanMinimize">
     <Window.DataContext>
-        <viewmodels:MainWindowViewModel/>
+        <viewmodels:MainWindowViewModel />
     </Window.DataContext>
-    <StackPanel>
-        <TextBox Text="{Binding Title , UpdateSourceTrigger=PropertyChanged}"></TextBox>
-    </StackPanel>
+    <DockPanel>
+        <Label DockPanel.Dock="Top" Content="Введите название города: " />
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160*" />
+                <ColumnDefinition Width="70*" />
+            </Grid.ColumnDefinitions>
+            <Button Content="Поиск" Grid.Column="1" Margin="20, 0 , 5 , 0" />
+            <StackPanel>
+                <TextBox MaxLines="1" SpellCheck.IsEnabled="True" xml:lang="ru" Height="21" />
+            </StackPanel>
+        </Grid>
+
+        <TabControl>
+            <TabItem Header="Погода" Grid.Column="1"></TabItem>
+            <TabItem Header="Карта">
+                <WebBrowser/></TabItem>
+        </TabControl>
+    </DockPanel>
 </Window>

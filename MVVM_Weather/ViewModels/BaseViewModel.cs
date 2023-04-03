@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MVVM_Weather.VIewModels;
+namespace MVVM_Weather.ViewModels;
 
 public abstract class BaseViewModel : INotifyPropertyChanged
 {
