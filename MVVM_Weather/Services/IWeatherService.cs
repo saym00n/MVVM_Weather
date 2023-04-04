@@ -5,6 +5,5 @@ namespace MVVM_Weather.Services;
 
 public interface IWeatherService
 {
-    Task<WeatherModel> GetWeather(HttpClient client,string city, string apikey);
-
+    Task<WeatherModel> GetWeather(HttpClient client, string city, string apikey);
 }

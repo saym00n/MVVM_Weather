@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Diagnostics;
-using Newtonsoft.Json;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Net;
 using System.Windows;
 
 namespace MVVM_Weather.Services;
@@ -18,9 +17,11 @@ public class GetWeatherService : IWeatherService
             case HttpStatusCode.Unauthorized:
                 MessageBox.Show("Нет подключения к интернету или неверный API-ключ");
                 break;
+
             case HttpStatusCode.NotFound:
                 MessageBox.Show("Город не найден.");
                 break;
+
             case HttpStatusCode.OK:
                 Debug.WriteLine("OK");
                 return JsonConvert.DeserializeObject<WeatherModel>(await weatherJson.Content.ReadAsStringAsync());

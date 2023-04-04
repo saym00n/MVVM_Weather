@@ -3,8 +3,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewmodels="clr-namespace:MVVM_Weather.ViewModels"
         xmlns:mvvmWeather="clr-namespace:MVVM_Weather"
+        xmlns:viewmodels="clr-namespace:MVVM_Weather.ViewModels"
         d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
         mc:Ignorable="d"
         Title="{Binding Title}" Height="450" Width="560" ResizeMode="CanMinimize">
@@ -13,14 +13,14 @@
     </Window.DataContext>
     <DockPanel>
         <Label DockPanel.Dock="Top" Content="OpenWeather ApiKey: " />
-        <TextBox DockPanel.Dock="Top" Text="{Binding ApiKey}"/>
+        <TextBox DockPanel.Dock="Top" Text="{Binding ApiKey}" />
         <Label DockPanel.Dock="Top" Content="Введите название города: " />
         <Grid DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="160*" />
                 <ColumnDefinition Width="70*" />
             </Grid.ColumnDefinitions>
-            <Button Content="Поиск" Grid.Column="1" Margin="20, 0 , 5 , 0"  Command="{Binding GetWeatherCommand}"/>
+            <Button Content="Поиск" Grid.Column="1" Margin="20, 0 , 5 , 0"  Command="{Binding GetWeatherCommand}" />
             <StackPanel>
                 <TextBox Text="{Binding City}" MaxLines="1" SpellCheck.IsEnabled="True" xml:lang="ru" Height="21" />
             </StackPanel>
@@ -31,11 +31,12 @@
                 <StackPanel>
                     <!-- <Image Source="{Binding Weather}"></Image> -->
                     <ListView ItemsSource="{Binding ObList, UpdateSourceTrigger=PropertyChanged, BindsDirectlyToSource=True}" ScrollViewer.VerticalScrollBarVisibility="Visible"
-                              ScrollViewer.CanContentScroll="True" MaxHeight="300" Height="300"/>
+                              ScrollViewer.CanContentScroll="True" MaxHeight="300" Height="300" />
                 </StackPanel>
             </TabItem>
             <TabItem Header="Карта">
-                <WebBrowser mvvmWeather:BrowserBehavior.BindableSource="{Binding MapLink}"/></TabItem>
+                <WebBrowser mvvmWeather:BrowserBehavior.BindableSource="{Binding MapLink}" />
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>
