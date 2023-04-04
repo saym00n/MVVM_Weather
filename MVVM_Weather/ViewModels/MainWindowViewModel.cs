@@ -1,13 +1,21 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Net.Http;
+using System.Reflection.Metadata.Ecma335;
 using System.Windows.Input;
 using MVVM_Weather.Commands;
 using MVVM_Weather.Services;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace MVVM_Weather.ViewModels;
 
 public class MainWindowViewModel : BaseViewModel
 {
-    readonly HttpClient client = new();
+    private readonly HttpClient client = new();
     #region title
 
     private readonly string _title = "Погода";
@@ -21,7 +29,7 @@ public class MainWindowViewModel : BaseViewModel
     public string City
     {
         get => _city;
-        set => SetField(ref _city, value);
+        set => SetField(ref _city, value.Trim());
     }
 
 
@@ -44,20 +52,19 @@ public class MainWindowViewModel : BaseViewModel
 
     public WeatherModel Weather
     {
-        get
+        get => _weather;
+        set
         {
-           return _weather;
+            SetField(ref _weather, value);
         }
     }
 
 
+    private ObservableCollection<string> _test = new();
 
-    private string _test = "0";
-
-    public string Test
+    public ObservableCollection<string> Test
     {
         get => _test;
-        set => SetField(ref _test, value);
     }
 
     #region GetWeatherCommand
@@ -66,10 +73,11 @@ public class MainWindowViewModel : BaseViewModel
 
     private async void OnGetWeatherCommandExecute(object p)
     {
-        WeatherModel _weather = await new GetWeatherService().GetWeather(client, _city, _apikey);
-        Test = _weather.ToString();
+            Weather = await new GetWeatherService().GetWeather(client, _city, _apikey);
+            if (!Weather.ToString().Equals(String.Empty)){
+                Test.Add(Weather.ToString());
+            }
     }
-
     private bool CanGetWeatherCommandExecuted(object p) => true;
     #endregion
 

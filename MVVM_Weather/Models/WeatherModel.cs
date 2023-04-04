@@ -169,6 +169,10 @@ public class WeatherModel
 
     public override string ToString()
     {
-        return CityName + " " + Main.Temperature + " " + Weather.First().Description;
+        if (this.StatusCode != 0)
+        {
+            return CityName + " " + Main.Temperature + "°C " + Weather.First().Description;
+        }
+        return string.Empty;
     }
 }}

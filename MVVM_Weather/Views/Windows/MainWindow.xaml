@@ -28,8 +28,9 @@
         <TabControl>
             <TabItem Header="Погода" Grid.Column="1">
                 <StackPanel>
-                    <Image Source="{Binding Weather}"></Image>
-                    <Label Content="{Binding Test}"></Label>
+                    <!-- <Image Source="{Binding Weather}"></Image> -->
+                    <!-- <Label Content="{Binding Test}"></Label> -->
+                    <ListView ItemsSource="{Binding Test, UpdateSourceTrigger=PropertyChanged, BindsDirectlyToSource=True}"></ListView>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Карта">
