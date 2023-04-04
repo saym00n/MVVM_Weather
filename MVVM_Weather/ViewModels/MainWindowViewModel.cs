@@ -9,7 +9,6 @@ using System.Reflection.Metadata.Ecma335;
 using System.Windows.Input;
 using MVVM_Weather.Commands;
 using MVVM_Weather.Services;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace MVVM_Weather.ViewModels;
 
@@ -32,13 +31,19 @@ public class MainWindowViewModel : BaseViewModel
         set => SetField(ref _city, value.Trim());
     }
 
+    private string _maplink;
+    public string MapLink
+    {
+        get => _maplink;
+        set => SetField(ref _maplink, value + $"?appid={ApiKey}");
+    }
 
 
     #endregion
 
     #region apikey
 
-    private string _apikey = "9ce36cb3e37709aeadb72516b2e9f1b8";
+    private string _apikey = "";
 
     public string ApiKey
     {
@@ -47,6 +52,8 @@ public class MainWindowViewModel : BaseViewModel
 
 
     #endregion
+
+    #region weather
 
     private WeatherModel _weather;
 
@@ -59,12 +66,14 @@ public class MainWindowViewModel : BaseViewModel
         }
     }
 
+    #endregion
 
-    private ObservableCollection<string> _test = new();
 
-    public ObservableCollection<string> Test
+    private ObservableCollection<string> _obList = new();
+
+    public ObservableCollection<string> ObList
     {
-        get => _test;
+        get => _obList;
     }
 
     #region GetWeatherCommand
@@ -75,8 +84,10 @@ public class MainWindowViewModel : BaseViewModel
     {
             Weather = await new GetWeatherService().GetWeather(client, _city, _apikey);
             if (!Weather.ToString().Equals(String.Empty)){
-                Test.Add(Weather.ToString());
-            }
+                ObList.Add(Weather.ToString());
+                MapLink = (new MapModel() { lat = Weather.Location.Latitude, lon = Weather.Location.Longitude })
+                    .maplink;
+        }
     }
     private bool CanGetWeatherCommandExecuted(object p) => true;
     #endregion
